@@ -1,15 +1,17 @@
-import React, {useState} from "react";
-import Votacao from './pages/Votacao';
-
+import React from "react";
+import Musicas from './pages/Musicas';
+import Menu from './components/Menu';
+import './html-css-template/css/reset.css';
+import './html-css-template/css/style.css';
 
 function App() {
-
-
   return (
+
     <>
-   <Votacao titulo="BK"/>
-   <Votacao titulo="Mc"/>
-   </>  
+      <Menu />
+      <Musicas />
+    </>
   );
 }
+
 export default App;
