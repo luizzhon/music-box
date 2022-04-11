@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ItemMusica from "../components/ItemMusica";
+import Menu from "../components/Menu";
+import api from '../api';
 
 function Musicas() {
+
+    const [musicas, setMusicas] = useState([]);
+
+    useEffect(() => {
+
+        api.get().then((res) => {
+            setMusicas(res.data);
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    }, [])
+
+
+
     return (
         <>
+            <Menu />
             <div className="container">
                 <div className="filter">
                     <button className="btn">Adicionar</button>
@@ -13,21 +31,26 @@ function Musicas() {
             <div className="container">
                 <div className="music-boxes">
 
-                    <ItemMusica 
-                    musica= "Coração gelado 3"
-                    artista= "Mc Joãozinho VT"
-                    genero= "Funk"
-                    ano= {2021}
-                    id= "1"
-                    />
+                    {
+                        musicas.map(musica => (
+                            <ItemMusica
+                                musica={musica.musica}
+                                artista={musica.artista}
+                                genero={musica.categoria}
+                                ano={musica.ano}
+                                id={musica.id}
+                                key={musica.id}
+                            />
+                        ))
+                    }
 
-                    <ItemMusica 
-                    musica= "Chama o coveiro"
-                    artista= "Mc Delux"
-                    genero= "Funk"
-                    ano= {2021}
-                    id= "1"
-                    />
+                    {/* <ItemMusica
+                        musica="Chama o coveiro"
+                        artista="Mc Delux"
+                        genero="Funk"
+                        ano={2021}
+                        id="1"
+                    /> */}
 
                 </div>
             </div>
