@@ -1,11 +1,17 @@
 import React from 'react';
 import edition from '../html-css-template/imagens/edit-icon.png'
 import deleteicon from '../html-css-template/imagens/delete-icon.png'
+import capaPadrao from '../html-css-template/imagens/capa.png'
 
 function ItemMusica(props) {
+
+const imagemFundo = {
+    backgroundImage: `url(${props.imagem ? props.imagem : capaPadrao})`
+}
+
     return (
         <>
-            <div className="card-music">
+            <div className="card-music" style={imagemFundo}>
                 <div className="icons">
                     <img src={edition} alt="" />
                     <img src={deleteicon} alt="" />
