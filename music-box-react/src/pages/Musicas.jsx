@@ -1,62 +1,53 @@
 import React, { useEffect, useState } from "react";
-import ItemMusica from "../components/ItemMusica";
+import ItemMusica from '../components/ItemMusica';
 import Menu from "../components/Menu";
+
 import api from '../api';
-import {useNavigate} from 'react-router-dom';
 
 function Musicas() {
 
-    const navigate = useNavigate();
-    const [musicas, setMusicas] = useState([]);
+  const [musicas, setMusicas] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
 
-        api.get().then((res) => {
-            setMusicas(res.data);
-        }).catch((err) => {
-            console.log(err);
-        })
+    api.get().then((res) => {
+      setMusicas(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
 
-    }, [])
+  }, [])
 
-    return (
-        <>
-            <Menu />
-            <div className="container">
-                <div className="filter">
-                    <button className="btn" onClick={() => navigate("/adicionar")}>Adicionar</button>
-                </div>
-            </div>
+  return (
+    <>
+      <Menu />
 
-            <div className="container">
-                <div className="music-boxes">
+      <div className="container">
+        <div className="filter">
+          <button className="btn">Adicionar</button>
+        </div>
+      </div>
 
-                    {
-                        musicas.map(musica => (
-                            <ItemMusica
-                                musica={musica.musica}
-                                artista={musica.artista}
-                                genero={musica.categoria}
-                                ano={musica.ano}
-                                imagem={musica.imagem}
-                                id={musica.id}
-                                key={musica.id}
-                            />
-                        ))
-                    }
+      <div className="container">
+        <div className="music-boxes">
 
-                    {/* <ItemMusica
-                        musica="Chama o coveiro"
-                        artista="Mc Delux"
-                        genero="Funk"
-                        ano={2021}
-                        id="1"
-                    /> */}
+          {
+            musicas.map(musica => (
+              <ItemMusica
+                musica={musica.musica}
+                artista={musica.artista}
+                genero={musica.categoria}
+                ano={musica.ano}
+                id={musica.id}
+                key={musica.id}
+              />
+            ))
+          }
 
-                </div>
-            </div>
-        </>
-    )
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Musicas;
